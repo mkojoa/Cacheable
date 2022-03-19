@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Cacheable.Kernel;
+using Cacheable.Services;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using StackExchange.RedisCache.Cacheable.Kernel;
-using StackExchange.RedisCache.Cacheable.Services;
 
-namespace StackExchange.RedisCache.Cacheable
+namespace Cacheable
 {
     public static class Extensions
     {

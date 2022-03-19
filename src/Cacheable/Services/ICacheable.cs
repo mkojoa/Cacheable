@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace StackExchange.RedisCache.Cacheable.Services
+namespace Cacheable.Services
 {
     public interface ICacheable
     {

@@ -1,10 +1,10 @@
-﻿using Microsoft.Extensions.Caching.Distributed;
+﻿using Cacheable.Kernel;
+using Microsoft.Extensions.Caching.Distributed;
 using Newtonsoft.Json;
-using StackExchange.RedisCache.Cacheable.Kernel;
 using System;
 using System.Threading.Tasks;
 
-namespace StackExchange.RedisCache.Cacheable.Services
+namespace Cacheable.Services
 {
     public class CacheableService : ICacheable
     {

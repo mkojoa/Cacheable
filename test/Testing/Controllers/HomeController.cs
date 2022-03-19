@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Cacheable.Services;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using StackExchange.RedisCache.Cacheable.Services;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -32,7 +32,7 @@ namespace Testing.Controllers
             {
                 var t = companyId.ToString();
 
-                await Task.Delay(1); // make a call to the api
+                await Task.Delay(5); // make a call to api
 
                 var employeeId = Guid.NewGuid();
 
