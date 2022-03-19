@@ -58,7 +58,9 @@ namespace StackExchange.RedisCache.Cacheable.Services
         {
             var options = new DistributedCacheEntryOptions()
             {
-                AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(20)
+                AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(
+                    CacheableOptions.Current.ExpiresAt
+                    )
             };
 
             return options;
