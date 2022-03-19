@@ -21,6 +21,7 @@ namespace Cacheable
             services.AddStackExchangeRedisCache(config =>
             {
                 config.Configuration = CacheableOptions.Current.Host;
+               
             });
 
             services.AddScoped<ICacheable, CacheableService>();

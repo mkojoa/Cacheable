@@ -56,11 +56,20 @@ namespace Cacheable.Services
 
         private static DistributedCacheEntryOptions AbsoluteExpiration()
         {
+            // === TimeSpanType
+            //FromDays
+            //FromHours
+            //FromMilliseconds
+            //FromMinutes
+            //FromSeconds
+            // === 
+
             var options = new DistributedCacheEntryOptions()
             {
-                AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(
-                    CacheableOptions.Current.ExpiresAt
-                    )
+                AbsoluteExpirationRelativeToNow 
+                = TimeSpan.FromSeconds(CacheableOptions.Current.ExpiresAt),
+
+                SlidingExpiration = TimeSpan.FromMinutes(60)
             };
 
             return options;
