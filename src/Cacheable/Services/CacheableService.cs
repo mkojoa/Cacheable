@@ -25,18 +25,6 @@ namespace StackExchange.RedisCache.Cacheable.Services
         public async Task<TResult> GetAsync<TResult>(string key)
         => await GetCacheItemAsync<TResult>(key);
 
-        //public async Task<bool> HasAsync(string key)
-        //{
-        //    var cachedItem = await GetCacheItemAsync(key);
-
-        //    if (cachedItem == null)
-        //    {
-        //        return false;
-        //    }
-
-        //    return true;
-        //}
-
         private async Task<T> TryCachingEntryAsync<T>
             (string key, Func<Task<T>> cacheFunc)
         {

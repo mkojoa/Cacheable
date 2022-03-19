@@ -16,6 +16,6 @@ namespace StackExchange.RedisCache.Cacheable.Kernel
         }
 
         public string Host { get; set; }
-        public string ExpiresAt { get; set; }
+        public int ExpiresAt { get; set; }
     }
 }
