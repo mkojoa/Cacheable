@@ -16,17 +16,15 @@ namespace Cacheable.Services
         }
 
 
-        public async Task<TResult> RememberAsync<TResult>(string key, Func<Task<TResult>> cacheFunc)
-        {
-            return await TryCachingEntryAsync(key, cacheFunc);
-        }
+        public async Task<TResult> RememberAsync<TResult>(string key, Func<Task<TResult>> cacheFunc, TimeSpan expiresIn)
+            => await TryCachingEntryAsync(key, cacheFunc, expiresIn);
 
 
         public async Task<TResult> GetAsync<TResult>(string key)
         => await GetCacheItemAsync<TResult>(key);
 
         private async Task<T> TryCachingEntryAsync<T>
-            (string key, Func<Task<T>> cacheFunc)
+            (string key, Func<Task<T>> cacheFunc, TimeSpan expiresIn)
         {
             var cachedItem = await GetCacheItemAsync<T>(key);
 
@@ -37,7 +35,7 @@ namespace Cacheable.Services
 
             T result = await cacheFunc();
 
-            await _driver.SetStringAsync(key, JsonConvert.SerializeObject(result), AbsoluteExpiration());
+            await _driver.SetStringAsync(key, JsonConvert.SerializeObject(result), AbsoluteExpiration(expiresIn));
 
             return result;
         }
@@ -54,25 +52,13 @@ namespace Cacheable.Services
 
         }
 
-        private static DistributedCacheEntryOptions AbsoluteExpiration()
+        private static DistributedCacheEntryOptions AbsoluteExpiration(TimeSpan expiresAt)
+        => new()
         {
-            // === TimeSpanType
-            //FromDays
-            //FromHours
-            //FromMilliseconds
-            //FromMinutes
-            //FromSeconds
-            // === 
+            AbsoluteExpirationRelativeToNow
+                = expiresAt,
 
-            var options = new DistributedCacheEntryOptions()
-            {
-                AbsoluteExpirationRelativeToNow 
-                = TimeSpan.FromSeconds(CacheableOptions.Current.ExpiresAt),
-
-                SlidingExpiration = TimeSpan.FromMinutes(60)
-            };
-
-            return options;
-        }
+            SlidingExpiration = TimeSpan.FromMinutes(CacheableOptions.Current.SlidingExpiration)
+        };
     }
 }

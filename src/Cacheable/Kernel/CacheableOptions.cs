@@ -16,6 +16,6 @@ namespace Cacheable.Kernel
         }
 
         public string Host { get; set; }
-        public int ExpiresAt { get; set; }
+        public int SlidingExpiration { get; set; }
     }
 }

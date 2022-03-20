@@ -37,7 +37,7 @@ namespace Testing.Controllers
                 return "This is a complex operation"; // return object from api
             };
 
-            var model = await _cacheable.RememberAsync(cacheKey, BigData);
+            var model = await _cacheable.RememberAsync(cacheKey, BigData, TimeSpan.FromSeconds(5));
 
             return View();
         }
